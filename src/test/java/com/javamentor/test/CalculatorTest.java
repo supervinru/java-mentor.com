@@ -201,78 +201,141 @@ public class CalculatorTest {
     }
 
     @Test
-    public void whenDivisionValidArabDataThanOK() throws OperationFormatException {
+    public void whenMultValidArabDataThanOK() throws OperationFormatException {
         Input in = new StubInput("10 * 10");
         new Calculator(in, parser, output).init(false);
         assertThat(parser.getResult(), is("100"));
     }
 
     @Test(expected = NumberFormatException.class)
-    public void whenDivisionInvalidArabDataThanTryException() throws OperationFormatException {
+    public void whenMultInvalidArabDataThanTryException() throws OperationFormatException {
         Input in = new StubInput("0 * 10");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }
 
     @Test(expected = NumberFormatException.class)
-    public void whenDivisionInvalidArabDataThanTryException2() throws OperationFormatException {
+    public void whenMultInvalidArabDataThanTryException2() throws OperationFormatException {
         Input in = new StubInput("11 * 5");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }
 
     @Test
-    public void whenDivisionValidArabDataThanOK2() throws OperationFormatException {
+    public void whenMultValidArabDataThanOK2() throws OperationFormatException {
         Input in = new StubInput("7 * 1");
         new Calculator(in, parser, output).init(false);
         assertThat(parser.getResult(), is("7"));
     }
 
     @Test
-    public void whenDivisionValidRomanDataThanOK() throws OperationFormatException {
+    public void whenMultValidRomanDataThanOK() throws OperationFormatException {
         Input in = new StubInput("x * X");
         new Calculator(in, parser, output).init(false);
         assertThat(parser.getResult(), is("C"));
     }
 
     @Test
-    public void whenDivisionValidRomanDataThanOK2() throws OperationFormatException {
+    public void whenMultValidRomanDataThanOK2() throws OperationFormatException {
         Input in = new StubInput("i * X");
         new Calculator(in, parser, output).init(false);
         assertThat(parser.getResult(), is("X"));
     }
 
     @Test
-    public void whenDivisionValidRomanDataThanOK3() throws OperationFormatException {
+    public void whenMultValidRomanDataThanOK3() throws OperationFormatException {
         Input in = new StubInput("vii * vii");
         new Calculator(in, parser, output).init(false);
         assertThat(parser.getResult(), is("XLIX"));
     }
 
     @Test(expected = NumberFormatException.class)
-    public void whenDivisionInvalidRomanDataThanTryException() throws OperationFormatException {
+    public void whenMultInvalidRomanDataThanTryException() throws OperationFormatException {
         Input in = new StubInput("xi * v");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }
 
     @Test(expected = NumberFormatException.class)
-    public void whenDivisionInvalidRomanDataThanTryException2() throws OperationFormatException {
+    public void whenMultInvalidRomanDataThanTryException2() throws OperationFormatException {
         Input in = new StubInput("VI * XII");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }
 
     @Test(expected = OperationFormatException.class)
-    public void whenDivisionInvalidRomanDataThanTryOperationException() throws OperationFormatException {
+    public void whenInvalidOperationWithRomanDataThenTryOperationException() throws OperationFormatException {
         Input in = new StubInput("VI @ X");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }
 
     @Test(expected = OperationFormatException.class)
-    public void whenDivisionInvalidArabDataThanTryOperationException() throws OperationFormatException {
+    public void whenInvalidOperationThenTryOperationException() throws OperationFormatException {
         Input in = new StubInput("1 @ 9");
+        new Calculator(in, parser, output).init(false);
+        parser.getResult();
+    }
+
+    @Test
+    public void whenDivisionValidArabDataThenGetRightAnswer() throws OperationFormatException {
+        Input in = new StubInput("10 / 2");
+        new Calculator(in, parser, output).init(false);
+        assertThat(parser.getResult(), is("5"));
+    }
+
+    @Test
+    public void whenDivisionValidArabDataThenGetRightAnswer2() throws OperationFormatException {
+        Input in = new StubInput("10 / 3");
+        new Calculator(in, parser, output).init(false);
+        assertThat(parser.getResult(), is("3"));
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void whenDivisionInvalidArabDataThenTryException() throws OperationFormatException {
+        Input in = new StubInput("11 / 2");
+        new Calculator(in, parser, output).init(false);
+        parser.getResult();
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void whenDivisionInvalidArabDataThenTryException2() throws OperationFormatException {
+        Input in = new StubInput("11 / 0");
+        new Calculator(in, parser, output).init(false);
+        parser.getResult();
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void whenDivisionInvalidArabDataThenTryException3() throws OperationFormatException {
+        Input in = new StubInput("0 / 1");
+        new Calculator(in, parser, output).init(false);
+        parser.getResult();
+    }
+
+    @Test
+    public void whenDivisionValidRomanDataThenOk() throws OperationFormatException {
+        Input in = new StubInput("x / ii");
+        new Calculator(in, parser, output).init(false);
+        assertThat(parser.getResult(), is("V"));
+    }
+
+    @Test
+    public void whenDivisionValidRomanDataThenOK2() throws OperationFormatException {
+        Input in = new StubInput("x / iii");
+        new Calculator(in, parser, output).init(false);
+        assertThat(parser.getResult(), is("III"));
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void whenDivisionInvalidRomanDataThenTryException3() throws OperationFormatException {
+        Input in = new StubInput("xi / ii");
+        new Calculator(in, parser, output).init(false);
+        parser.getResult();
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void whenDivisionInvalidRomanDataThenTryException() throws OperationFormatException {
+        Input in = new StubInput("xii / xi");
         new Calculator(in, parser, output).init(false);
         parser.getResult();
     }

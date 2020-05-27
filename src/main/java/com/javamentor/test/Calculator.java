@@ -24,7 +24,7 @@ public class Calculator {
         while (toggle) {
             String s = input.ask("Input:");
             parser.parse(s);
-            input.ask("Output: \n" + parser.getResult());
+            input.answer("Output: \n" + parser.getResult());
             toggle = flag;
         }
     }

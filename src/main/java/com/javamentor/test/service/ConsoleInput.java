@@ -10,4 +10,10 @@ public class ConsoleInput implements Input {
         System.out.println(question);
         return scanner.nextLine();
     }
+
+    @Override
+    public String answer(String answer) {
+        System.out.println(answer);
+        return "";
+    }
 }

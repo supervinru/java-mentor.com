@@ -12,4 +12,9 @@ public class StubInput implements Input {
     public String ask(String question) {
         return this.value;
     }
+
+    @Override
+    public String answer(String answer) {
+        return this.value;
+    }
 }
